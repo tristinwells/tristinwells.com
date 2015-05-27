@@ -1,15 +1,17 @@
+
+
 from django.contrib import admin
-from django.db.models import TextField
 
-from django_markdown.widgets import AdminMarkdownWidget
-
-from . import models
+from blog.models import Blog
+from blog.models import Category
 
 
-class EntryAdmin(MarkdownModelAdmin):
-    list_display = ("title", "created")
-    prepopulated_fields = {"slug": ("title",)}
-    # Next line is a workaround for Python 2.x
-    formfield_overrides = {TextField: {'widget': AdminMarkdownWidget}}
+class BlogAdmin(admin.ModelAdmin):
+    exclude = ['posted']
+    prepopulated_fields = {'slug': ('title',)}
 
-admin.site.register(models.Entry, EntryAdmin)
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
+
+admin.site.register(Blog, BlogAdmin)
+admin.site.register(Category, CategoryAdmin)

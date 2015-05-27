@@ -1,24 +1,29 @@
 from django.db import models
+from django.db.models import permalink
 
+# Create your models here.
 
-class EntryQuerySet(models.QuerySet):
-    def published (self):
-        return self.filter(published=True)
-
-class Entry(models.Model):
-    title = models.CharField(max_length=200)
+class Blog(models.Model):
+    title = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
     body = models.TextField()
-    slug = models.SlugField(max_length=200, unique=True)
-    published = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+    posted = models.DateTimeField(db_index=True, auto_now_add=True)
+    category = models.ForeignKey('blog.Category')
 
-    objects = EntryQuerySet.as_manager()
+    def __unicode__(self):
+        return '%s' % self.title
 
-    def __sstr__(self):
-        return self.title
+    @permalink
+    def get_absolute_url(self):
+        return ('view_blog_post', None, { 'slug': self.slug })
 
-    class Meta:
-        verbose_name = "Blog Entry"
-        verbose_name_plural = "Blog Entries"
-        ordering = ["-created"]
+class Category(models.Model):
+    title = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=100, db_index=True)
+
+    def __unicode__(self):
+        return '%s' % self.title
+
+    @permalink
+    def get_absolute_url(self):
+        return ('view_blog_category', None, { 'slug': self.slug })
