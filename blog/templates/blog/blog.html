@@ -1,0 +1,15 @@
+{% extends "blog/blogbase.html" %}
+{% load django_markdown %}
+
+{% block blog_entries %}
+{% for object in object_list %}
+    
+    <div class="blog-post">
+	    <h2 class="blog-post-title">{{object.title}}</h2>
+	    <p class="blog-post-meta"> {{object.posted}} <a href="#"> {{object.created_user}}</a></p>
+	   {{ object.body|markdown}}
+	  </div>
+	      
+    
+{% endfor %}
+{% endblock %}
