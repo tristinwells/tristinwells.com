@@ -6,7 +6,7 @@ from .managers import BlogManager
 
 
 # Create your models here.
-class Blog(models.Model):
+class Entry(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     body = models.TextField()
