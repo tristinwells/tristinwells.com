@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class BlogManager(models.Manager):
+class BlogEntryManager(models.Manager):
 
     def get_by_user(self, user):
         return self.filter(created_user=user)
