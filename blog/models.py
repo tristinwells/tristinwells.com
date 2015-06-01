@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import permalink
 
+from .managers import BlogManager
+
 
 # Create your models here.
 class Blog(models.Model):
@@ -11,6 +13,7 @@ class Blog(models.Model):
     posted = models.DateTimeField(db_index=True, auto_now_add=True)
     category = models.ForeignKey('blog.Category', blank=True, null=True)
     created_user = models.ForeignKey(User)
+    objects = BlogManager()
 
     def __unicode__(self):
         return '%s' % self.title
@@ -29,19 +32,3 @@ class Category(models.Model):
     @permalink
     def get_absolute_url(self):
         return ('view_blog_category', None, { 'slug': self.slug })
-
-class ProjectManager(models.Manager):
-
-    def get_by_user(self, user):
-        return self.filter(created_user=user)
-
-
-
-    def get_recent(self):
-        return self.order_by('posted')
-
-    def get_by_month(self, sssmonth):
-        return self.filter(pub_date='month')
-
-    def get_by_day(self):
-        return self.filter(pub_date='day')
