@@ -1,17 +1,15 @@
-
-
 from django.contrib import admin
 
-from blog.models import Blog
+from blog.models import Entry
 from blog.models import Category
 
 
-class BlogAdmin(admin.ModelAdmin):
+class EntryAdmin(admin.ModelAdmin):
     exclude = ['posted']
     prepopulated_fields = {'slug': ('title',)}
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
-admin.site.register(Blog, BlogAdmin)
+admin.site.register(Entry, EntryAdmin)
 admin.site.register(Category, CategoryAdmin)
