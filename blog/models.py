@@ -2,18 +2,18 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import permalink
 
-from .managers import BlogManager
+from .managers import BlogEntryManager
 
 
 # Create your models here.
 class Entry(models.Model):
-    title = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     body = models.TextField()
-    posted = models.DateTimeField(db_index=True, auto_now_add=True)
+    created_dttm = models.DateTimeField(db_index=True, auto_now_add=True)
     category = models.ForeignKey('blog.Category', blank=True, null=True)
     created_user = models.ForeignKey(User)
-    objects = BlogManager()
+    objects = BlogEntryManager()
 
     def __unicode__(self):
         return '%s' % self.title

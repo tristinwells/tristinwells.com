@@ -9,7 +9,7 @@ class BlogEntryManager(models.Manager):
     def get_recent(self):
         return self.order_by('-posted')
 
-    def get_by_month(self, sssmonth):
+    def get_by_month(self, month):
         return self.filter(pub_date='month')
 
     def get_by_day(self):

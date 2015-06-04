@@ -45,6 +45,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'blog',
     'django_markdown',
+    'django_core',
+    'personalsite',
 
 )
 
@@ -74,7 +76,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
-        os.path.join(BASE_DIR, 'blog')],
+                 os.path.join(BASE_DIR, 'blog')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
