@@ -1,0 +1,1 @@
+django_core==1.4.1
