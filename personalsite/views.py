@@ -6,3 +6,6 @@ class HomeView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'about.html'
+
+class AddView(TemplateView):
+    template_name = 'add-entry.html'
