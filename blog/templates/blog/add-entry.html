@@ -1,5 +1,5 @@
 {% extends "blog/blogbase.html" %}
-
+{% block title %}Add Blog{% endblock %}
 {% block blog_entries %}
   {% if user.isAuthenticated %}Hi {{ user.getFullName }}{% endif %}
     <h2>Most Recent Posts</h2>
@@ -12,7 +12,7 @@
             </li>
         {% endfor %}
         
-    <form action="{% url 'add_views' %}" method="post">
+    <form action="{% url 'blog_add_view' %}" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit" />

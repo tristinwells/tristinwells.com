@@ -1,4 +1,5 @@
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
 
 
 class HomeView(TemplateView):
@@ -7,5 +8,5 @@ class HomeView(TemplateView):
 class AboutView(TemplateView):
     template_name = 'about.html'
 
-class AddView(TemplateView):
-    template_name = 'add-entry.html'
+class AddView(FormView):
+    template_name = 'blog/add-entry.html'
