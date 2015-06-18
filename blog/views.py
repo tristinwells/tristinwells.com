@@ -25,7 +25,7 @@ class EntryView(ListView):
 def index(request):
     return render_to_response('index.html', {
         'categories': Category.objects.all(),
-        'posts': Entry.objects.all()[:5]
+        'posts': Entry.objects.all()
     })
 
 def view_post(request, slug):
