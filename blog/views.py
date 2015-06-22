@@ -1,5 +1,4 @@
-
-from _datetime import timezone
+from datetime import datetime
 
 from bootstrap.views import DeleteView
 from django.shortcuts import render_to_response, get_object_or_404
@@ -61,5 +60,5 @@ class EntryListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(EntryListView, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
+        context['now'] = datetime.now()
         return context
