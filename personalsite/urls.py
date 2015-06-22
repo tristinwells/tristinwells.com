@@ -18,7 +18,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from blog import views
+from blog.views import EntriesView
 from blog.views import EntryView
 from personalsite.views import AboutView
 from personalsite.views import HomeView
@@ -26,10 +26,10 @@ from personalsite.views import HomeView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^index/', HomeView.as_view(), name='home_view'),
+    url(r'^/?$', HomeView.as_view(), name='home_view'),
     url(r'^about/?$', AboutView.as_view(), name='about_view'),
-    url(r'^blog/', EntryView.as_view(), name='blog_view'),
-    url(r'^(?P<entry_id>[0-9]+)/$', views.index, name='entry_view'),
+    url(r'^blog/?$', EntriesView.as_view(), name='blog_view'),
+    url(r'^blog/(?P<entry_id>[0-9]+)/?$', EntryView.as_view(), name='entry_view'),
     # url(r'^$', TemplateView.as_view(template_name='todo/index.html')),
     # url(r'^$', views.BlogIndex.as_view(), name="index")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
