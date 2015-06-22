@@ -36,10 +36,8 @@ class EntryDeleteView(DeleteView):
 
 
 class EntriesView(ListView):
-    return render_to_response('index.html', {
-        'categories': Category.objects.all(),
-        'posts': Entry.objects.all()
-    })
+    template_name = 'blog/blog.html'
+    model = Entry
 
 def view_post(request, slug):
     return render_to_response('view_post.html', {

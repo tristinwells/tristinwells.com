@@ -5,7 +5,7 @@
 {% for object in object_list %}
     
     <div class="blog-post">
-	    <h2 class="blog-post-title"><a href="{% url delete_entry_view %}">{{object.title}}</a></h2>
+	    <h2 class="blog-post-title"><a href="{% url view_etry %}">{{object.title}}</a></h2>
 	    <p class="blog-post-meta"> {{object.posted}} <a href="#"> {{object.created_user}}</a></p>
 	   {{ object.body|markdown}}
 	  </div>
