@@ -1,11 +1,9 @@
 from datetime import datetime
 
 from bootstrap.views import DeleteView
-from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from blog.models import Category
 from blog.models import Entry
 
 
@@ -38,19 +36,6 @@ class EntryDeleteView(DeleteView):
 class EntriesView(ListView):
     template_name = 'blog/blog.html'
     model = Entry
-
-def view_post(request, slug):
-    return render_to_response('view_post.html', {
-        'post': get_object_or_404(Entry, slug=slug)
-    })
-
-def view_category(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    return render_to_response('view_category.html', {
-        'category': category,
-        'posts': Entry.objects.filter(category=category)[:5]
-    })
-
 
 class EntryListView(ListView):
 
