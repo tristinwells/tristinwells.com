@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from bootstrap.views import DeleteView
+from bootstrap.views import UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
@@ -37,6 +38,7 @@ class EntriesView(ListView):
     template_name = 'blog/blog.html'
     model = Entry
 
+
 class EntryListView(ListView):
 
     model = Entry
@@ -45,3 +47,9 @@ class EntryListView(ListView):
         context = super(EntryListView, self).get_context_data(**kwargs)
         context['now'] = datetime.now()
         return context
+
+class UpdateEntry(UpdateView):
+    template_name = 'bog/update_entry.html'
+    fields = ['title', 'body', 'objects']
+
+

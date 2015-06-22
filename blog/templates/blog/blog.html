@@ -9,7 +9,12 @@
 	    <p class="blog-post-meta"> {{object.posted}} <a href="#"> {{object.created_user}}</a></p>
 	   {{ object.body|markdown}}
 	  </div>
-	      
+	    <nav>
+            <ul class="pager">
+              <li><a href="#">Previous</a></li>
+              <li><a href="#">Next</a></li>
+            </ul>
+          </nav>
     
 {% endfor %}
 {% endblock %}
