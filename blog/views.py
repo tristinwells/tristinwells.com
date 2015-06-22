@@ -37,11 +37,6 @@ class EntryDeleteView(DeleteView):
 
 
 class EntriesView(ListView):
-    template_name = 'blog/blog.html'
-    model = Entry
-
-
-def index(request):
     return render_to_response('index.html', {
         'categories': Category.objects.all(),
         'posts': Entry.objects.all()
