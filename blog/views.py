@@ -23,11 +23,6 @@ class EntryView(DetailView):
     model = Entry
     pk_url_kwarg = 'entry_id'
 
-    def get_context_data(self, **kwargs):
-        context = super(EntryView, self).get_context_data(**kwargs)
-
-        return context
-
 class EntryDeleteView(DeleteView):
     template_name = 'blog/delete_entry.html'
     model = Entry
