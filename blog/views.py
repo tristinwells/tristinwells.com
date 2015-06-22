@@ -1,12 +1,13 @@
 
 from _datetime import timezone
 
+from bootstrap.views import DeleteView
 from django.shortcuts import render_to_response, get_object_or_404
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from blog.models import Category
 from blog.models import Entry
-from django.views.generic.detail import DetailView
 
 
 # Class based views:
@@ -30,6 +31,9 @@ class EntryView(DetailView):
 
         return context
 
+class EntryDeleteView(DeleteView):
+    template_name = 'blog/delete_entry.html'
+    model = Entry
 
 
 class EntriesView(ListView):
