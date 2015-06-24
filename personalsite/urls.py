@@ -20,6 +20,7 @@ from django.contrib import admin
 
 from blog.views import EntryDeleteView
 from blog.views import EntryView
+from blog.views import LoginRequiredView
 from personalsite.views import AboutView
 from personalsite.views import AddView
 from personalsite.views import HomeView
@@ -33,6 +34,7 @@ urlpatterns = [
     url(r'^blog/add/?$', AddView.as_view(), name='blog_add_view'),
     url(r'^blog/(?P<entry_id>[0-9]+)/?$', EntryView.as_view(), name='entry_view'),
     url(r'^blog/(?P<entry_id>[0-9]+)/delete/?$', EntryDeleteView.as_view(), name='delete_entry_view'),
+    url(r'^blog/login/?$', LoginRequiredView.as_view(), name='login_view'),
     # url(r'^$', TemplateView.as_view(template_name='todo/index.html')),
     # url(r'^$', views.BlogIndex.as_view(), name="index")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
