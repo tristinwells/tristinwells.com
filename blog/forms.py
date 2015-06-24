@@ -32,7 +32,7 @@ class BlogForm(ModelForm):
         model = Entry
         fields = ['title', 'created_dttm', 'body', 'created_user']
 
-class UpdateForm(ModelForm):
+class EntryUpdateForm(ModelForm):
     edit = forms.CharField(required=False)
 
     class Meta:
