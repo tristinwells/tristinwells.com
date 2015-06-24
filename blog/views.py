@@ -1,97 +1,27 @@
+from bootstrap.views import DeleteView
+from bootstrap.views import ListView
+from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
+from django_core.views.mixins.auth import LoginRequiredViewMixin
 
-from django.core.paginator import EmptyPage
-from django.core.paginator import PageNotAnInteger
-from django.core.paginator import Paginator
-from django.shortcuts import render_to_response, get_object_or_404
-from django.views.generic.edit import FormView
-from django.views.generic.list import ListView
-
-from blog.forms  import ContactForm
-from blog.models import Category
-from blog.models import Contacts
 from blog.models import Entry
 
 
-class EntryView(ListView):
+class EntryView(DetailView):
+    template_name = 'blog/view_entry.html'
+    model = Entry
+    pk_url_kwarg = 'entry_id'
+
+class LoginRequiredView(LoginRequiredViewMixin, TemplateView):
+    template_name = 'blog/loginRequired.html'
+
+class EntryDeleteView(DeleteView):
+    template_name = 'blog/delete_entry.html'
+    model = Entry
+
+
+class EntriesView(ListView):
     template_name = 'blog/blog.html'
     model = Entry
 
 
-def index(self):
-    return render_to_response('index.html', {
-        'categories': Category.objects.all(),
-        'posts': Entry.objects.all()[:5]
-    })
-
-def view_post(request, slug):
-    return render_to_response('view_post.html', {
-        'post': get_object_or_404(Entry, slug=slug)
-    })
-
-def view_category(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    return render_to_response('view_category.html', {
-        'category': category,
-        'posts': Entry.objects.filter(category=category)[:5]
-    })
-
-class ContactView(FormView):
-    template_name = 'contact.html'
-    form_class = ContactForm
-    success_url = '/thanks/'
-
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.send_email()
-        return super(ContactView, self).form_valid(form)
-
-
-# class LoginRequiredViewMixin(object):
-#     """Use this with CBVs to ensure user is logged in.
-#     Example:
-#     class MyView(LoginRequireViewMixin, TemplateView):
-#         # to view stuff
-#     """
-#
-#     @method_decorator(login_required)
-#     def dispatch(self, *args, **kwargs):
-#         return super(LoginRequiredViewMixin, self).dispatch(*args, **kwargs)
-#
-# class StaffRequiredViewMixin(LoginRequiredViewMixin):
-#     """Require a logged in Staff member."""
-#
-#     def dispatch(self, request, *args, **kwargs):
-#         if not request.user.is_staff:
-#             raise PermissionDenied
-#
-#         return super(StaffRequiredViewMixin, self).dispatch(request,
-#                                                             *args,
-#                                                             **kwargs)
-
-# class SuperuserRequiredViewMixin(LoginRequiredViewMixin):
-#     """Require a logged in user to be a superuser."""
-#
-#     def dispatch(self, request, *args, **kwargs):
-#         if not request.user.is_superuser:
-#             raise PermissionDenied
-#
-#         return super(SuperuserRequiredViewMixin, self).dispatch(request,
-#                                                                 *args,
-#                                                                 **kwargs)
-
-def listing(request):
-    contact_list = Contacts.objects.all()
-    paginator = Paginator(contact_list, 25)  # Show 25 contacts per page
-
-    page = request.GET.get('page')
-    try:
-        contacts = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        contacts = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        contacts = paginator.page(paginator.num_pages)
-
-    return render_to_response('list.html', {"contacts": contacts})
