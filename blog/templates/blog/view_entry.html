@@ -4,5 +4,8 @@
     <h2>{{ entry.title }}</h2>
     <p>{{ entry.body }}</p>
     <p>{{ value|date:"D f d Y" }}</p>
+    <p><a href="{% url update_entry_view %}">Update Entry</a><p/>
+    <p><a href="{% url delete_entry_view %}">Delete Entry</a><p/>
+    
     
 {% endblock %}

@@ -1,5 +1,6 @@
 from bootstrap.views import DeleteView
 from bootstrap.views import ListView
+from bootstrap.views import UpdateView
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django_core.views.mixins.auth import LoginRequiredViewMixin
@@ -24,4 +25,7 @@ class EntriesView(ListView):
     template_name = 'blog/blog.html'
     model = Entry
 
+class UpdateEntryView(UpdateView):
+    template_name = 'bog/update_entry.html'
+    fields = ['title', 'body', 'objects']
 
