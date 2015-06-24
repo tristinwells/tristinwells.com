@@ -1,0 +1,10 @@
+{% extends "blog/blogbase.html" %}
+
+{% block blog_content %}
+    <h1>Update {{ entry.title }}</h1>
+    
+    <form action="{% url update_entry_view %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update" />
+    </form>
+{% endblock %}
