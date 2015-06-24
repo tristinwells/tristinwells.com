@@ -30,4 +30,13 @@ class ContactForm(forms.Form):
 class BlogForm(ModelForm):
     class Meta:
         model = Entry
-        fields = ['pub_date', 'headline', 'content', 'ImageField']
+        fields = ['title', 'created_dttm', 'body', 'created_user']
+
+class UpdateForm(ModelForm):
+    edit = forms.CharField(required=False)
+
+    class Meta:
+        model = Entry
+        fields = ['title', 'body']
+
+

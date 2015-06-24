@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django_core.views.mixins.auth import LoginRequiredViewMixin
 
+from blog.forms import UpdateForm
 from blog.models import Entry
 
 
@@ -26,6 +27,7 @@ class EntriesView(ListView):
     model = Entry
 
 class UpdateEntryView(UpdateView):
+    form_class = UpdateForm
     template_name = 'bog/update_entry.html'
     fields = ['title', 'body', 'objects']
 
