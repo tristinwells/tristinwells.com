@@ -2,6 +2,7 @@ from django import forms
 from django.db.models.fields import CharField
 from django.forms.models import ModelForm
 from django_core.forms.fields import CharFieldStripped
+from django_core.forms.mixins.users import UserFormMixin
 
 from blog.models import Entry
 
@@ -27,10 +28,16 @@ class ContactForm(forms.Form):
         return super(CharFieldStripped, self).clean(value)
 
 
-class BlogForm(ModelForm):
+class EntryAddForm(UserFormMixin, ModelForm):
+
     class Meta:
         model = Entry
-        fields = ['title', 'created_dttm', 'body', 'created_user']
+        fields = ['title', 'body']
+
+    def save(self, *args, **kwargs):
+        self.instance.created_user = self.user
+        return super(EntryAddForm, self).save(*args, **kwargs)
+
 
 class EntryUpdateForm(ModelForm):
     edit = forms.CharField(required=False)

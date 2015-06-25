@@ -36,7 +36,8 @@
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="{% url "home_view" %}">Home</a>
         <!--  <a class="blog-nav-item" href="#">New features</a> -->
-          <a class="blog-nav-item" href=""{% url "about_view" %}>About</a>
+          <a class="blog-nav-item" href="{% url "about_view" %}">About</a>
+          <a class="blog-nav-item" href="{% url "blog_view" %}">Blog Home</a>
         </nav>
       </div>
     </div>
@@ -48,7 +49,7 @@
         <p class="lead blog-description">The official page of outrageous thoughts.</p>
         {% block add %}{% endblock %}
       </div>
-          {% block blog_context %}{% endblock %}
+          {% block blog_content %}{% endblock %}
 
       <div class="row">
 

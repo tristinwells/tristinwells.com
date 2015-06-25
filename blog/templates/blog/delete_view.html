@@ -2,4 +2,9 @@
 
 {% block blog_content %}
     <p>Are you sure you want to delete {{ entry.title }}?</p>
+    <form action="{% url 'delete_entry_view' object.id %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Confirm" />
+</form>
 {% endblock %}

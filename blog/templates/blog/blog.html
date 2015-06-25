@@ -1,12 +1,16 @@
 {% extends "blog/blogbase.html" %}
 {% load django_markdown %}
+{% block add %}<h3><a role="presentation" class="active"><a href="{% url "blog_add_view" %}">Add Post</a><h3>{% endblock %}
 
-{% block blog_context %}
+
+{% block blog_content %}
 {% for object in object_list %}
+
     
     <div class="blog-post">
-	    <h2 class="blog-post-title">{{object.title}}</h2>
-	    <p class="blog-post-meta"> {{object.posted}} <a href="#"> {{object.created_user}}</a></p>
+	    <h2><a class="blog-post-title"><a href="{% url "entry_view" object.id %}">{{object.title}}</a></h2>
+	    <p class="blog-post-meta"> {{object.posted}} 
+	    <a href="#"> {{object.created_user}}</a></p>
 	   {{ object.body|markdown}}
 	  </div>
 	   {% block link %}
@@ -15,8 +19,6 @@
     {{ contact.full_name|upper }}<br />
     ...
 {% endfor %}
-{% block add %}<h3><a role="presentation" class="active"><a href="{% url "blog_add_view" %}">Add Post</a><h3>{% endblock %}
-
 <div class="pagination">
     <span class="step-links">
         {% if contacts.has_previous %}
