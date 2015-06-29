@@ -91,6 +91,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'personalsite.wsgi.application'
 
+LOGIN_URL = '/admin/login/'
+
+LOGOUT_URL = '/admin/logout/'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
