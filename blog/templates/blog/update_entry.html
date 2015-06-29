@@ -3,8 +3,8 @@
 {% block blog_content %}
     <h1>Update {{ entry.title }}</h1>
     
-    <form action="{% url update_entry_view %}" method="post">{% csrf_token %}
-    {{ form }}
+    <form action="{% url 'update_entry_view' object.id %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
     <input type="submit" value="Update" />
     </form>
 {% endblock %}

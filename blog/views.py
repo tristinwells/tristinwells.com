@@ -1,6 +1,5 @@
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
@@ -18,10 +17,14 @@ class EntryView(DetailView):
     model = Entry
     pk_url_kwarg = 'entry_id'
 
-class LoginRequiredView(LoginRequiredViewMixin, TemplateView):
-    template_name = 'blog/loginRequired.html'
+# class LoginRequiredMixin(object):
+#     @classmethod
+#     def as_view(cls, **initkwargs):
+#         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+#         return login_required(view)
 
-class AddView(CreateView):
+
+class AddView(LoginRequiredViewMixin, CreateView):
     model = Entry
     template_name = 'blog/add-entry.html'
     form_class = EntryAddForm
@@ -34,19 +37,33 @@ class AddView(CreateView):
     def get_success_url(self):
         return reverse('entry_view', args=[self.object.id])
 
-class EntryDeleteView(DeleteView):
+
+class EntryDeleteView(LoginRequiredViewMixin, DeleteView):
     template_name = 'blog/delete_view.html'
     model = Entry
     pk_url_kwarg = 'entry_id'
     success_url = reverse_lazy('blog_view')
 
+
 class EntriesView(ListView):
     template_name = 'blog/blog.html'
     model = Entry
     pk_url_kwarg = 'entry_id'
+    paginate_by = 2
+
+#     def get_context_data(self, **kwargs):
+#         context = super(EntriesView, self).get_context_data(**kwargs)
+#         import pdb
+#         pdb.set_trace()
+#         return context
 
 
-class UpdateEntryView(UpdateView):
+class UpdateEntryView(LoginRequiredViewMixin, UpdateView):
     form_class = EntryUpdateForm
-    template_name = 'bog/update_entry.html'
-    fields = ['title', 'body', 'objects']
+    template_name = 'blog/update_entry.html'
+    # fields = ['title', 'body', 'objects']
+    pk_url_kwarg = 'entry_id'
+    model = Entry
+
+    def get_success_url(self):
+        return reverse('entry_view', args=[self.object.id])
