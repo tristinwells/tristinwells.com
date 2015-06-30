@@ -17,12 +17,6 @@ class EntryView(DetailView):
     model = Entry
     pk_url_kwarg = 'entry_id'
 
-# class LoginRequiredMixin(object):
-#     @classmethod
-#     def as_view(cls, **initkwargs):
-#         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
-#         return login_required(view)
-
 
 class AddView(LoginRequiredViewMixin, CreateView):
     model = Entry
@@ -50,12 +44,6 @@ class EntriesView(ListView):
     model = Entry
     pk_url_kwarg = 'entry_id'
     paginate_by = 2
-
-#     def get_context_data(self, **kwargs):
-#         context = super(EntriesView, self).get_context_data(**kwargs)
-#         import pdb
-#         pdb.set_trace()
-#         return context
 
 
 class UpdateEntryView(LoginRequiredViewMixin, UpdateView):
