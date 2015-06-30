@@ -40,10 +40,8 @@ class EntryAddForm(UserFormMixin, ModelForm):
 
 
 class EntryUpdateForm(ModelForm):
-    edit = forms.CharField(required=False)
+    # edit = forms.CharField(required=False)
 
     class Meta:
         model = Entry
         fields = ['title', 'body']
-
-

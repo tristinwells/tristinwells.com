@@ -22,7 +22,7 @@ from blog.views import AddView
 from blog.views import EntriesView
 from blog.views import EntryDeleteView
 from blog.views import EntryView
-from blog.views import LoginRequiredView
+# from blog.views import LoginRequiredView
 from blog.views import UpdateEntryView
 from personalsite.views import AboutView
 from personalsite.views import HomeView
@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^blog/(?P<entry_id>\d+)/?$', EntryView.as_view(), name='entry_view'),
     url(r'^blog/(?P<entry_id>\d+)/delete/?$', EntryDeleteView.as_view(), name='delete_entry_view'),
     url(r'^blog/(?P<entry_id>\d+)/update/?$', UpdateEntryView.as_view(), name='update_entry_view'),
-    url(r'^blog/login/?$', LoginRequiredView.as_view(), name='login_view'),
+    # url(r'^blog/login/?$', LoginRequiredView.as_view(), name='login_view'),
     # url(r'^$', TemplateView.as_view(template_name='todo/index.html')),
     # url(r'^$', views.BlogIndex.as_view(), name="index")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
