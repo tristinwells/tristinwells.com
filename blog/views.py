@@ -55,3 +55,12 @@ class UpdateEntryView(LoginRequiredViewMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('entry_view', args=[self.object.id])
+
+class TagEntriesView(ListView):
+    model = Entry
+    template_name = 'blog/tag_it.html'
+
+    def get_queryset(self):
+        query_set = super(TagEntriesView, self).get_queryset()
+        # tag = self.request.GET.get('tag')
+        return query_set.filter(tags__name=self.kwargs.get('tag_slug'))

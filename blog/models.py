@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import permalink
 from django.template.defaultfilters import slugify
+from taggit.managers import TaggableManager
 
 from .managers import BlogEntryManager
 
@@ -17,9 +18,10 @@ class Entry(models.Model):
     category = models.ForeignKey('blog.Category', blank=True, null=True)
     created_user = models.ForeignKey(User)
     objects = BlogEntryManager()
+    tags = TaggableManager()
 
-    def __unicode__(self):
-        return '%s' % self.title
+    def __str__(self):
+        return self.title
 
     @permalink
     def get_absolute_url(self):
@@ -36,27 +38,9 @@ class Category(models.Model):
     title = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, db_index=True)
 
-    def __unicode__(self):
-        return '%s' % self.title
+    def __str__(self):
+        return self.title
 
     @permalink
     def get_absolute_url(self):
         return ('view_blog_category', None, { 'slug': self.slug })
-
-class Contacts(models.Model):
-    first_name = models.CharField(
-        max_length=255,
-    )
-    last_name = models.CharField(
-        max_length=255,
-
-    )
-
-    email = models.EmailField()
-
-    def __str__(self):
-
-        return ' '.join([
-            self.first_name,
-            self.last_name,
-        ])

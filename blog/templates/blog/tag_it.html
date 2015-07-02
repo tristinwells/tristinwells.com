@@ -1,0 +1,22 @@
+{% extends "blog/blogbase.html" %}
+{% block blog_content %}
+{% for object in object_list %}
+
+    
+    <div class="blog-post">
+        <h2><a class="blog-post-title"><a href="{% url "entry_view" object.id %}">{{object.title}}</a></h2>
+        {% for tag in object.tags.all %}
+           <a href="{% url 'tag_entry_view' tag.slug %}">{{ tag.name }}</a>
+        {% endfor %}
+        <p class="blog-post-meta"> {{object.posted}} 
+        <a href="#"> {{object.created_user}}</a></p>
+    </div>
+    {% block link %}
+        {% for contact in contacts %}
+            {# Each "contact" is a Contact model object. #}
+            {{ contact.full_name|upper }}<br />
+            ...
+        {% endfor %}
+    {% endblock %}    
+{% endfor %}
+{% endblock %}

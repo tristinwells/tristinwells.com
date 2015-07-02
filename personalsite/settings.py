@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django_markdown',
     'django_core',
     'personalsite',
+    'taggit',
 
 )
 
