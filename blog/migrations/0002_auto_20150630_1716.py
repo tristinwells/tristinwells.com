@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 from django.conf import settings
 
 
@@ -16,12 +17,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Entry',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
-                ('title', models.CharField(unique=True, max_length=100)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('title', models.CharField(max_length=100)),
                 ('slug', models.SlugField(unique=True, max_length=100)),
                 ('body', models.TextField()),
-                ('posted', models.DateTimeField(auto_now_add=True, db_index=True)),
-                ('category', models.ForeignKey(blank=True, null=True, to='blog.Category')),
+                ('created_dttm', models.DateTimeField(default=datetime.datetime.utcnow, db_index=True)),
+                ('category', models.ForeignKey(null=True, to='blog.Category', blank=True)),
                 ('created_user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
         ),

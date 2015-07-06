@@ -16,10 +16,10 @@ class ContactForm(forms.Form):
         pass
 
     class CharFieldStripped(CharField):
-        """Wrapper around CharField that strips whitespace from the CharField when
-    validating so .strip() doesn't have to be called every time you validate
-    the field's data.
-    """
+        """Wrapper around CharField that strips whitespace from the CharField
+        when validating so .strip() doesn't have to be called every time you
+        validate the field's data.
+        """
 
     def clean(self, value):
         if value:
@@ -32,7 +32,7 @@ class EntryAddForm(UserFormMixin, ModelForm):
 
     class Meta:
         model = Entry
-        fields = ['title', 'body']
+        fields = ['title', 'body', 'tags']
 
     def save(self, *args, **kwargs):
         self.instance.created_user = self.user
@@ -44,4 +44,4 @@ class EntryUpdateForm(ModelForm):
 
     class Meta:
         model = Entry
-        fields = ['title', 'body']
+        fields = ['title', 'body', 'tags']

@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('taggit', '0001_initial'),
-        ('blog', '0004_auto_20150609_1943'),
+        ('blog', '0002_auto_20150630_1716'),
     ]
 
     operations = [
@@ -17,10 +17,5 @@ class Migration(migrations.Migration):
             model_name='entry',
             name='tags',
             field=taggit.managers.TaggableManager(help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags'),
-        ),
-        migrations.AlterField(
-            model_name='entry',
-            name='created_dttm',
-            field=models.DateTimeField(db_index=True),
         ),
     ]
