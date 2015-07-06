@@ -8,7 +8,7 @@
         {% for tag in object.tags.all %}
            <a href="{% url 'tag_entry_view' tag.slug %}">{{ tag.name }}</a>
         {% endfor %}
-        <p class="blog-post-meta"> {{object.posted}} 
+        <p class="blog-post-meta"> {{value|date:"D d M Y"}} 
         <a href="#"> {{object.created_user}}</a></p>
     </div>
     {% block link %}

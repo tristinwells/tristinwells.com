@@ -28,7 +28,7 @@ from personalsite.views import AboutView
 from personalsite.views import HomeView
 
 
-# from blog.views import LoginRequiredView
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^/?$', HomeView.as_view(), name='home_view'),
