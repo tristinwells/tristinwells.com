@@ -17,6 +17,25 @@ class EntryView(DetailView):
     model = Entry
     pk_url_kwarg = 'entry_id'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(EntryView, self).get_context_data(*args, **kwargs)
+        tags = self.object.tags.all()
+
+        icon_class = None
+        for tag in tags:
+            tag_name = tag.name.lower()
+            if tag_name == 'sports':
+                icon_class = 'fa-futbol-o'
+#             elif tag_name == 'sports':
+#                 icon_class = 'fa-futbol-o'
+
+            if icon_class is not None:
+                break
+
+        context['icon_class'] = icon_class
+        return context
+
+
 
 class AddView(LoginRequiredViewMixin, CreateView):
     model = Entry
