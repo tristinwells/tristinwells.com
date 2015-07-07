@@ -1,11 +1,9 @@
 {% extends "blog/blogbase.html" %}
 
 {% block blog_content %}
-    <h2>{{ entry.title }}</h2>
+    <h2>{{ entry.title }}{% if icon_class %}<i class="fa {{ icon_class}}"></i>{% endif %}</h2>
     <p>{{ entry.body }}</p>
-    <p>{{ value|date:"D f d Y" }}</p>
+    <p>{{ object.posted|date:"D f d Y" }}</p>
     <p><a href="{% url 'update_entry_view' object.id %}">Update Entry</a><p/>
     <p><a href="{% url 'delete_entry_view' object.id %}">Delete Entry</a><p/>
-    
-    
 {% endblock %}
